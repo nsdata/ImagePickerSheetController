@@ -31,7 +31,7 @@ public enum ImagePickerMediaType {
     
 }
 
-@available(iOS 9.0, *)
+@available(iOS 8.0, *)
 open class ImagePickerSheetController: UIViewController {
     
     fileprivate lazy var sheetController: SheetController = {
@@ -243,8 +243,9 @@ open class ImagePickerSheetController: UIViewController {
         }
         
         let fetchLimit = 50
-        options.fetchLimit = fetchLimit
-        
+        if #available(iOS 9, *) {
+            options.fetchLimit = fetchLimit
+        }
         let result = PHAsset.fetchAssets(with: options)
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
