@@ -228,7 +228,11 @@ public class ImagePickerSheetController: UIViewController {
         }
         
         let fetchLimit = 50
-        options.fetchLimit = fetchLimit
+        if #available(iOS 9.0, *) {
+            options.fetchLimit = fetchLimit
+        } else {
+            // Fallback on earlier versions
+        }
         
         let result = PHAsset.fetchAssetsWithOptions(options)
         let requestOptions = PHImageRequestOptions()
